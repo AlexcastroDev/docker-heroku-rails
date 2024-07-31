@@ -58,7 +58,7 @@ Subsequent runs will use cached changes. This is useful to avoid you from (1) ha
 * 2023/04/10: Remove copy of entire app folder into container. Copy only Gemfile to install bundler.
 * 2021/11/01: Change image ownership to Rnters organization. Upgrade to Heroku 20 build image.
 
-
+.
 ### License
 
 MIT (see LICENSE file)

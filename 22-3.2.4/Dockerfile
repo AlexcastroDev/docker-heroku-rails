@@ -1,4 +1,4 @@
-FROM heroku/heroku:22-build
+FROM --platform=linux/amd64 heroku/heroku:22-build
 LABEL maintainer="jfloff@flecto.io"
 
 ENV HOME=/app \
@@ -48,16 +48,16 @@ RUN set -ex ;\
     # Install extra dependencies
     #------------
     apt-get update && apt-get install -y --no-install-recommends \
-        tzdata \
-        tree \
-        # needed to download https gems
-        libssl-dev \
-        # for rails rspec
-        busybox \
-        # utils
-        inetutils-ping \
-        vim \
-        ; \
+    tzdata \
+    tree \
+    # needed to download https gems
+    libssl-dev \
+    # for rails rspec
+    busybox \
+    # utils
+    inetutils-ping \
+    vim \
+    ; \
     rm -rf /var/lib/apt/lists/* ;\
     # fix bug when launching rails console
     ln -s /lib/x86_64-linux-gnu/libreadline.so.7 /lib/x86_64-linux-gnu/libreadline.so.6 ;\
@@ -89,7 +89,7 @@ ONBUILD ADD . $HOME
 ONBUILD RUN set -ex ;\
     # force bundle to use github https protocol
     bundle config github.https true
-    # avoid installing gems here so we give a chance for child images to install any dependency
-    # eg. SQLite3 extension
+# avoid installing gems here so we give a chance for child images to install any dependency
+# eg. SQLite3 extension
 
 ENTRYPOINT ["/usr/bin/init.sh"]
